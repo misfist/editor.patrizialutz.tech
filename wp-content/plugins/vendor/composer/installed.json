@@ -1,0 +1,46 @@
+[
+    {
+        "name": "wp-graphql/wp-graphql-acf",
+        "version": "v0.4.1",
+        "version_normalized": "0.4.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/wp-graphql/wp-graphql-acf.git",
+            "reference": "2545c2f32ac2d21db271eb5ab5334bc233b42cf1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/wp-graphql/wp-graphql-acf/zipball/2545c2f32ac2d21db271eb5ab5334bc233b42cf1",
+            "reference": "2545c2f32ac2d21db271eb5ab5334bc233b42cf1",
+            "shasum": ""
+        },
+        "require-dev": {
+            "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+            "lucatume/wp-browser": "^2.2.",
+            "phpcompatibility/phpcompatibility-wp": "^2.0",
+            "wp-coding-standards/wpcs": "^2.1"
+        },
+        "time": "2021-01-19 21:23:00",
+        "type": "wordpress-plugin",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "WPGraphQL\\ACF\\": "src/"
+            },
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0+"
+        ],
+        "authors": [
+            {
+                "name": "jasonbahl",
+                "email": "jasonbahl@mac.com"
+            }
+        ],
+        "description": "Advanced Custom Fields bindings for wp-graphql"
+    }
+]
