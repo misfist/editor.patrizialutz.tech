@@ -65,6 +65,9 @@ function register_form() {
 		'publicly_queryable'    => false,
 		'capability_type'       => 'page',
 		'show_in_rest'          => true,
+		'show_in_graphql'		=> true,
+		'graphql_single_name'	=> 'form',
+		'graphql_plural_name'	=> 'forms'
 	);
 	\register_post_type( 'form-response', $args );
 
@@ -129,6 +132,10 @@ function register_project() {
 		'capability_type'       => 'page',
 		'show_in_rest'          => true,
 		'rest_base'             => 'projects',
+		'show_in_graphql'		=> true,
+		'graphql_single_name'	=> 'project',
+		'graphql_plural_name'	=> 'projects'
+
 	);
 	\register_post_type( 'project', $args );
 
