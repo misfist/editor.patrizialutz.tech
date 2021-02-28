@@ -365,6 +365,26 @@ if( function_exists( '\acf_add_local_field_group' ) ) {
 				'prepend' => '@',
 				'append' => '',
 			),
+			array(
+				'key' => 'field_ip',
+				'label' => __( 'IP', 'core-functionality' ),
+				'name' => 'ip',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'show_in_graphql' => 1,
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
 		),
 		'location' => array(
 			array(
@@ -416,27 +436,6 @@ if( function_exists( '\acf_add_local_field_group' ) ) {
 		return \update_post_meta( $object->ID, $field, \sanitize_text_field( $value ) );
 	},
 ]);
-
-
-/**
- * Update Meta Fields
- *
- * @param \WP_Post $post
- * @param obj $request
- * @param boolean $creating
- * @return void
- */
-function update_meta_rest( \WP_Post $post, $request, $creating ) {
-	$meta = $request->get_param( 'meta' );
-    if ( is_array( $meta ) ) {
-        foreach ( $meta as $name => $value ) {
-            \update_post_meta( $post->ID, $name, $value );
-
-            // \update_field( $name, $value, $post->ID );
-        }
-    }
-}
-// add_action( 'rest_insert_form-response', __NAMESPACE__ . '\update_meta_rest' );
 
 /**
  * Register Fields with GraphQL
