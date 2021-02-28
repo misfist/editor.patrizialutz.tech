@@ -11,7 +11,7 @@
  *
  * @package         Core_Functionality
  */
-namespace Patrizia_Lutz;
+namespace Core_Functionality;
 
  if ( ! defined( 'ABSPATH' ) ) exit;
 

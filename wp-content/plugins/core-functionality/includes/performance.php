@@ -6,7 +6,7 @@
  * @since      0.1.0
  * @license    GPL-2.0+
  */
-namespace Patrizia_Lutz\Performance;
+namespace Core_Functionality\Performance;
 
 /**
  * Remove query strings from static resources
