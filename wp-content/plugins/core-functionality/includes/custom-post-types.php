@@ -6,34 +6,34 @@
  * @since      0.1.1
  * @license    GPL-2.0+
  */
-namespace Patrizia_Lutz\Custom_Post_Types;
+namespace Core_Functionality\Custom_Post_Types;
 
 /**
- * Register Forms
+ * Register Responses
  * 
  * @since   0.1.1
  *
  * @return void
  */
-function register_form() {
+function register_response() {
 
 	$labels = array(
-		'name'                  => _x( 'Forms', 'Form General Name', 'core-functionality' ),
-		'singular_name'         => _x( 'Form', 'Form Singular Name', 'core-functionality' ),
-		'menu_name'             => __( 'Forms', 'core-functionality' ),
-		'name_admin_bar'        => __( 'Form', 'core-functionality' ),
-		'archives'              => __( 'Form Archives', 'core-functionality' ),
-		'attributes'            => __( 'Form Attributes', 'core-functionality' ),
-		'parent_item_colon'     => __( 'Parent Form:', 'core-functionality' ),
-		'all_items'             => __( 'All Forms', 'core-functionality' ),
-		'add_new_item'          => __( 'Add New Form', 'core-functionality' ),
+		'name'                  => _x( 'Responses', 'Response General Name', 'core-functionality' ),
+		'singular_name'         => _x( 'Response', 'Response Singular Name', 'core-functionality' ),
+		'menu_name'             => __( 'Responses', 'core-functionality' ),
+		'name_admin_bar'        => __( 'Response', 'core-functionality' ),
+		'archives'              => __( 'Response Archives', 'core-functionality' ),
+		'attributes'            => __( 'Response Attributes', 'core-functionality' ),
+		'parent_item_colon'     => __( 'Parent Response:', 'core-functionality' ),
+		'all_items'             => __( 'All Responses', 'core-functionality' ),
+		'add_new_item'          => __( 'Add New Response', 'core-functionality' ),
 		'add_new'               => __( 'Add New', 'core-functionality' ),
-		'new_item'              => __( 'New Form', 'core-functionality' ),
-		'edit_item'             => __( 'Edit Form', 'core-functionality' ),
-		'update_item'           => __( 'Update Form', 'core-functionality' ),
-		'view_item'             => __( 'View Form', 'core-functionality' ),
-		'view_items'            => __( 'View Forms', 'core-functionality' ),
-		'search_items'          => __( 'Search Form', 'core-functionality' ),
+		'new_item'              => __( 'New Response', 'core-functionality' ),
+		'edit_item'             => __( 'Edit Response', 'core-functionality' ),
+		'update_item'           => __( 'Update Response', 'core-functionality' ),
+		'view_item'             => __( 'View Response', 'core-functionality' ),
+		'view_items'            => __( 'View Responses', 'core-functionality' ),
+		'search_items'          => __( 'Search Response', 'core-functionality' ),
 		'not_found'             => __( 'Not found', 'core-functionality' ),
 		'not_found_in_trash'    => __( 'Not found in Trash', 'core-functionality' ),
 		'featured_image'        => __( 'Featured Image', 'core-functionality' ),
@@ -42,8 +42,8 @@ function register_form() {
 		'use_featured_image'    => __( 'Use as featured image', 'core-functionality' ),
 		'insert_into_item'      => __( 'Insert into item', 'core-functionality' ),
 		'uploaded_to_this_item' => __( 'Uploaded to this item', 'core-functionality' ),
-		'items_list'            => __( 'Forms list', 'core-functionality' ),
-		'items_list_navigation' => __( 'Forms list navigation', 'core-functionality' ),
+		'items_list'            => __( 'Responses list', 'core-functionality' ),
+		'items_list_navigation' => __( 'Responses list navigation', 'core-functionality' ),
 		'filter_items_list'     => __( 'Filter items list', 'core-functionality' ),
 	);
 	$args = array(
@@ -65,14 +65,15 @@ function register_form() {
 		'publicly_queryable'    => false,
 		'capability_type'       => 'page',
 		'show_in_rest'          => true,
+		'rest_base'				=> 'responses',
 		'show_in_graphql'		=> true,
-		'graphql_single_name'	=> 'form',
-		'graphql_plural_name'	=> 'forms'
+		'graphql_single_name'	=> 'response',
+		'graphql_plural_name'	=> 'responses'
 	);
 	\register_post_type( 'form-response', $args );
 
 }
-\add_action( 'init', __NAMESPACE__ . '\register_form', 0 );
+\add_action( 'init', __NAMESPACE__ . '\register_response', 0 );
 
 /**
  * Register Project Post Type
@@ -141,3 +142,46 @@ function register_project() {
 
 }
 \add_action( 'init', __NAMESPACE__ . '\register_project', 0 );
+
+/**
+ * Add Portfolio to GraphQl
+ * 
+ * @param array $args
+ * @param string $post_type
+ * @return array $args - maybe modified
+ */
+function register_post_type_args( $args, $post_type ) {
+	if ( 'jetpack-portfolio' === $post_type ) { 
+		$args['show_in_graphql'] = true;
+		$args['graphql_single_name'] = 'portfolio';
+		$args['graphql_plural_name'] = 'portfolios';
+		$args['supports'][] = 'page-attributes';
+	}
+
+	return $args;
+}
+add_filter( 'register_post_type_args', __NAMESPACE__ . '\register_post_type_args', 10, 2 );
+
+/**
+ * Register Portfolio Taxonomy to GraphQL
+ * 
+ * @param array $args
+ * @param string $taxonomy
+ * @return array $args maybe modified
+ */
+function register_taxonomy_args( $args, $taxonomy ) {
+	if ( 'jetpack-portfolio-type' === $taxonomy ) {
+		$args['show_in_graphql'] = true;
+		$args['graphql_single_name'] = 'portfolioType';
+		$args['graphql_plural_name'] = 'portfolioTypes';
+	}
+	
+	if ( 'jetpack-portfolio-tag' === $taxonomy ) {
+		$args['show_in_graphql'] = true;
+		$args['graphql_single_name'] = 'portfolioTag';
+		$args['graphql_plural_name'] = 'portfolioTags';
+	}
+
+	return $args;
+}
+\add_filter( 'register_taxonomy_args', __NAMESPACE__ . '\register_taxonomy_args', 10, 2 );
