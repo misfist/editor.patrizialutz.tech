@@ -392,20 +392,29 @@ if( function_exists( '\acf_add_local_field_group' ) ) {
 \register_meta( 'post', 'name', [
 	'object_subtype' 	=> 'form-response',
 	'show_in_rest' 		=> true,
-	'single'			=> true
+	'single'			=> true,
+	'update_callback' 	=> function ( $value, $object, $field ) {
+		return \update_post_meta( $object->ID, $field, \sanitize_text_field( $value ) );
+	},
 ]);
 
 \register_meta( 'post', 'email', [
 	'object_subtype' 	=> 'form-response',
 	'show_in_rest' 		=> true,
-	'single'			=> true
+	'single'			=> true,
+	'update_callback' 	=> function ( $value, $object, $field ) {
+		return \update_post_meta( $object->ID, $field, sanitize_email( $value) );
+	}
 
 ]);
 
 \register_meta( 'post', 'ip', [
 	'object_subtype' 	=> 'form-response',
 	'show_in_rest' 		=> true,
-	'single'			=> true
+	'single'			=> true,
+	'update_callback' 	=> function ( $value, $object, $field ) {
+		return \update_post_meta( $object->ID, $field, \sanitize_text_field( $value ) );
+	},
 ]);
 
 
@@ -421,12 +430,13 @@ function update_meta_rest( \WP_Post $post, $request, $creating ) {
 	$meta = $request->get_param( 'meta' );
     if ( is_array( $meta ) ) {
         foreach ( $meta as $name => $value ) {
-            \update_post_meta( $post->ID, $name, sanitize_text_field( $value ) );
+            \update_post_meta( $post->ID, $name, $value );
+
             // \update_field( $name, $value, $post->ID );
         }
     }
 }
-add_action( 'rest_insert_form-response', __NAMESPACE__ . '\update_meta_rest' );
+// add_action( 'rest_insert_form-response', __NAMESPACE__ . '\update_meta_rest' );
 
 /**
  * Register Fields with GraphQL
