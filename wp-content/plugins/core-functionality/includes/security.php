@@ -59,4 +59,4 @@ function set_response_headers() {
 		header( 'Allow: POST, GET, OPTIONS' );
     } );
 }
-// \add_action( 'rest_api_init', 'set_response_headers', 15 );
+\add_action( 'rest_api_init', 'set_response_headers', 15 );
