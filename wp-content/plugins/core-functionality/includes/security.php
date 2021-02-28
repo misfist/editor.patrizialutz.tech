@@ -53,10 +53,13 @@ function remove_wp_version_meta_tag() {
  * @return void
  */
 function set_response_headers() {
-    \add_action( 'rest_pre_serve_request', function () {
+    \remove_filter( 'rest_pre_serve_request', 'rest_send_cors_headers' );
+    \add_filter( 'rest_pre_serve_request', function ( $value ) {
         header( 'Access-Control-Allow-Origin: *' );
 		header( 'Access-Control-Allow-Methods: POST, GET, OPTIONS' );
-		header( 'Allow: POST, GET, OPTIONS' );
+        header( 'Access-Control-Allow-Credentials: true' );
+		// header( 'Allow: POST, GET, OPTIONS' );
+        return $value;
     } );
 }
 \add_action( 'rest_api_init', 'set_response_headers', 15 );
