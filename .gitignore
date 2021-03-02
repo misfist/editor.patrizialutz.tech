@@ -30,6 +30,7 @@ wp-content/plugins/*
 !/wp-content/plugins/core-functionality/
 !/wp-content/plugins/wp-graphql-acf
 !/wp-content/plugins/wp-graphql-tax-query-develop
+!/wp-content/plugins/wp-graphql-extra-options
 
 # Ignore everything in the "themes" directory, except the themes you
 # specify (see the commented-out example for a hint on how to do this.)
