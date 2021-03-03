@@ -8,29 +8,26 @@
  */
 namespace Core_Functionality\Admin;
 
-
-if( function_exists( 'acf_add_options_page' ) ) {
-
-    acf_add_options_page(array(
-        'page_title' => __( 'Site Settings', 'core-functionality' ),
-        'menu_title' => __( 'Site Settings', 'core-functionality' ),
+if( function_exists( '\acf_add_options_page' ) ) {
+    \acf_add_options_page( array(
+        'page_title' => __('Site Settings', 'core-functionality'),
+        'menu_title' => __('Site Settings', 'core-functionality'),
         'menu_slug' => 'site-settings',
         'capability' => 'manage_options',
-        'position' => '',
+        'position' => '1',
         'parent_slug' => 'options-general.php',
-        'icon_url' => '',
-        'redirect' => true,
-        'post_id' => 'options',
+        // 'icon_url' => '',
+        // 'redirect' => false,
+        // 'post_id' => 'options',
         'autoload' => true,
-        'update_button' => __( 'Update', 'core-functionality' ),
-        'updated_message' => __( 'Options Updated', 'core-functionality' ),
+        'update_button' => __('Update', 'core-functionality'),
+        'updated_message' => __('Settings Updated', 'core-functionality'),
     ));
-    
 }
 
-if( function_exists( 'acf_add_local_field_group' ) ) {
 
-    acf_add_local_field_group( array(
+if( function_exists( '\acf_add_local_field_group' ) ) {
+    \acf_add_local_field_group( array(
         'key' => 'group_site_options',
         'title' => __( 'Site Options', 'core-functionality' ),
         'fields' => array(
@@ -102,15 +99,7 @@ if( function_exists( 'acf_add_local_field_group' ) ) {
         'hide_on_screen' => '',
         'active' => true,
         'description' => '',
-        'acfe_display_title' => '',
-        'acfe_autosync' => array(
-            0 => 'php',
-        ),
-        'acfe_form' => 0,
         'show_in_graphql' => 1,
         'graphql_field_name' => 'siteOptions',
-        'acfe_meta' => '',
-        'acfe_note' => '',
     ));
-    
 }
